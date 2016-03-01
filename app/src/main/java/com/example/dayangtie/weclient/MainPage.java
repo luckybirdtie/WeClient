@@ -33,35 +33,78 @@ public class MainPage extends AppCompatActivity {
     private TextView mTokenText;
 
     private Button logButton;
+    private Button logOutButton;
+    private Button enterButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-        Log.d("myclient", "created");
+        //Log.d("myclient", "created");
         logButton = (Button) findViewById(R.id.btn_login);
+        logOutButton = (Button) findViewById(R.id.btn_logout);
+        enterButton = (Button) findViewById(R.id.btn_enter);
         mTokenText = (TextView) findViewById(R.id.token_text_view);
-        mTokenText.setText("none");
+        //mTokenText.setText("none");
+
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startAuth();
             }
         });
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AccessTokenKeeper.clear(getApplicationContext());
+                mAccessToken = new Oauth2AccessToken();
+                updateTokenView(false);
+            }
+        });
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLoginValid()) {
+                    Intent intent = new Intent(MainPage.this, MainActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(MainPage.this, "请先登录", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
+
 
     private void startAuth() {
         mAuthInfo = new AuthInfo(this, Constants.APP_KEY, Constants.REDIRECT_URL, Constants.SCOPE);
         mSsoHandler = new SsoHandler(MainPage.this, mAuthInfo);
         //Log.d("failfail", "fail here???????");
 
-        mSsoHandler.authorizeWeb(new AuthListener());
-       // mSsoHandler.authorizeClientSso(new AuthListener());
+       // mSsoHandler.authorizeWeb(new AuthListener());
+       //mSsoHandler.authorizeClientSso(new AuthListener());
+        mSsoHandler.authorize(new AuthListener());
 
-        mAccessToken = AccessTokenKeeper.readAccessToken(this);
-        if (mAccessToken.isSessionValid()) {
+        //mAccessToken = AccessTokenKeeper.readAccessToken(this);
+        if (isLoginValid()) {
             updateTokenView(true);
         }
 
+    }
+
+    //是否授权仍然VALID
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //mAccessToken = AccessTokenKeeper.readAccessToken(this);
+        if (isLoginValid()) {
+            updateTokenView(true);
+        }
+    }
+
+    //判断TOKEN SESSION是否仍然有效
+    private boolean isLoginValid(){
+        mAccessToken = AccessTokenKeeper.readAccessToken(this);
+        return mAccessToken.isSessionValid();
     }
 
     /**

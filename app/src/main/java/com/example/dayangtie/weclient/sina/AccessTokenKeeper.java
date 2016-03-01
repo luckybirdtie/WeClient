@@ -1,7 +1,5 @@
 package com.example.dayangtie.weclient.sina;
 
-
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -10,9 +8,6 @@ import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 
 /**
  * 该类定义了微博授权时所需要的参数。
- *
- * @author SINA
- * @since 2013-10-07
  */
 public class AccessTokenKeeper {
     private static final String PREFERENCES_NAME = "com_weibo_sdk_android";

@@ -94,7 +94,6 @@
     <string name="share_url">url分享到私信</string>
 
 
-
     <!-- 分享所用的测试数据 -->
     <string name="weibosdk_demo_share_webpage_desc">网页描述：XXX</string>
     <string name="weibosdk_demo_share_music_desc">音乐描述：XXX</string>
@@ -157,7 +156,6 @@
     <string name="goto_send_weibo">进入发微薄页面</string>
 
 
-
     <!-- 统计上传页 -->
     <string name="weibosdk_demo_fragment_title">This is a fragment page</string>
     <string name="weibosdk_demo_log_upload">强制上传</string>
@@ -188,4 +186,8 @@
     <string name="weibosdk_demo_launch_poi_page">POI页面</string>
     <string name="weibosdk_demo_launch_mblog_detail">查看微博正文</string>
     <string name="weibosdk_demo_launch_qrcode">扫描二维码界面</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

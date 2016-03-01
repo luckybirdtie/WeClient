@@ -33,11 +33,6 @@ public class GuideActivity extends AppCompatActivity implements ViewPager.OnPage
         welcomViewPager = (ViewPager) findViewById(R.id.welcome_view_pager);
         welcomViewPager.setAdapter(wvPagerAdapter);
         welcomViewPager.addOnPageChangeListener(this);
-
-
-
-
-
     }
 
     @Override
