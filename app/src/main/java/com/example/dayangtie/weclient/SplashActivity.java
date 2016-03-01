@@ -67,9 +67,9 @@ public class SplashActivity extends AppCompatActivity {
         if(!isFirstLaunch){
             mHandler.sendEmptyMessageDelayed(GO_HOME, SPLASH_DELAY_MILLIS);
             //若想要LOAD欢迎页面， uncomment below to clean local SharedPreferences.
-            //SharedPreferences.Editor editor = mSharedPreferences.edit();
-            //editor.clear();
-            //editor.apply();
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.clear();
+            editor.apply();
         }
         else{
             mHandler.sendEmptyMessageDelayed(GO_GUIDE, SPLASH_DELAY_MILLIS);

@@ -80,9 +80,9 @@ public class MainPage extends AppCompatActivity {
         mSsoHandler = new SsoHandler(MainPage.this, mAuthInfo);
         //Log.d("failfail", "fail here???????");
 
-       // mSsoHandler.authorizeWeb(new AuthListener());
-       //mSsoHandler.authorizeClientSso(new AuthListener());
-        mSsoHandler.authorize(new AuthListener());
+       // mSsoHandler.authorizeWeb(new AuthListener()); //web authorization
+       //mSsoHandler.authorizeClientSso(new AuthListener()); //client authorization
+        mSsoHandler.authorize(new AuthListener()); //auto-detect if a Weibo client is installed on phone, if yes use client authorization, otherwise use web.
 
         //mAccessToken = AccessTokenKeeper.readAccessToken(this);
         if (isLoginValid()) {
