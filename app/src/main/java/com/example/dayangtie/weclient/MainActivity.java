@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +31,7 @@ import com.sina.weibo.sdk.openapi.UsersAPI;
 import com.sina.weibo.sdk.openapi.models.ErrorInfo;
 import com.sina.weibo.sdk.openapi.models.User;
 import com.sina.weibo.sdk.utils.LogUtil;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private String access_token;
     private Oauth2AccessToken mAccessToken;
     private UsersAPI mUsersAPI;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +57,23 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         toolBarImgView = (ImageView) toolbar.findViewById(R.id.imgView_profile);
-        toolBarImgView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        toolBarImgView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
         toolBarTextView = (TextView) toolbar.findViewById(R.id.textView_profile);
 
         mAccessToken = AccessTokenKeeper.readAccessToken(this);
         mUsersAPI = new UsersAPI(this, Constants.APP_KEY, mAccessToken);
         long uid = Long.parseLong(mAccessToken.getUid());
         mUsersAPI.show(uid, mListener);
+
+        mViewPager = (ViewPager) findViewById(R.id.main_activity_viewpager);
+        mViewPager.setAdapter(new MainActivityFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this));
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +102,22 @@ public class MainActivity extends AppCompatActivity
                 // 调用 User#parse 将JSON串解析成User对象
                 User user = User.parse(response);
                 toolBarTextView.setText(user.screen_name);
+                String imageUri = user.profile_image_url;
+                final ProgressBar progressBar = new ProgressBar(MainActivity.this);
+                progressBar.setVisibility(View.VISIBLE);
+                Picasso.with(MainActivity.this).load(imageUri).into(toolBarImgView, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        if (progressBar != null) {
+                            progressBar.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
 //                if (user != null) {
 //                    Toast.makeText(MainActivity.this,
 //                            "获取User信息成功，用户昵称：" + user.screen_name,
