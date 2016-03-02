@@ -65,6 +65,7 @@ public class MainPage extends AppCompatActivity {
             public void onClick(View v) {
                 if (isLoginValid()) {
                     Intent intent = new Intent(MainPage.this, MainActivity.class);
+                    intent.putExtra("access_token", mAccessToken.getToken());
                     startActivity(intent);
                 }else{
                     Toast.makeText(MainPage.this, "请先登录", Toast.LENGTH_SHORT).show();

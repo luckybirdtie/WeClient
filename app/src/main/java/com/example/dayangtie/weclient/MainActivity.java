@@ -1,8 +1,11 @@
 package com.example.dayangtie.weclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,18 +15,55 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.dayangtie.weclient.sina.AccessTokenKeeper;
+import com.example.dayangtie.weclient.sina.Constants;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.net.RequestListener;
+import com.sina.weibo.sdk.openapi.UsersAPI;
+import com.sina.weibo.sdk.openapi.models.ErrorInfo;
+import com.sina.weibo.sdk.openapi.models.User;
+import com.sina.weibo.sdk.utils.LogUtil;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ImageView toolBarImgView;
+    private TextView toolBarTextView;
+    private Intent intent;
+    private String access_token;
+    private Oauth2AccessToken mAccessToken;
+    private UsersAPI mUsersAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //intent = getIntent();
+       // access_token = intent.getStringExtra("access_token");
+        //Log.d("mainactivity", access_token);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        toolBarImgView = (ImageView) toolbar.findViewById(R.id.imgView_profile);
+        toolBarImgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toast.makeText(MainActivity.this, "test", Toast.LENGTH_SHORT).show();
+            }
+        });
+        toolBarTextView = (TextView) toolbar.findViewById(R.id.textView_profile);
+
+        mAccessToken = AccessTokenKeeper.readAccessToken(this);
+        mUsersAPI = new UsersAPI(this, Constants.APP_KEY, mAccessToken);
+        long uid = Long.parseLong(mAccessToken.getUid());
+        mUsersAPI.show(uid, mListener);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +83,32 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    //回调函数，mUsersAPI.show(uid, mListener);
+    private RequestListener mListener = new RequestListener() {
+        @Override
+        public void onComplete(String response) {
+            if (!TextUtils.isEmpty(response)) {
+                // 调用 User#parse 将JSON串解析成User对象
+                User user = User.parse(response);
+                toolBarTextView.setText(user.screen_name);
+//                if (user != null) {
+//                    Toast.makeText(MainActivity.this,
+//                            "获取User信息成功，用户昵称：" + user.screen_name,
+//                            Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(MainActivity.this, response, Toast.LENGTH_LONG).show();
+//                }
+            }
+        }
+
+        @Override
+        public void onWeiboException(WeiboException e) {
+            //LogUtil.e(TAG, e.getMessage());
+            ErrorInfo info = ErrorInfo.parse(e.getMessage());
+            Toast.makeText(MainActivity.this, info.toString(), Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     public void onBackPressed() {
