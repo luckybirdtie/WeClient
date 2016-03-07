@@ -205,7 +205,15 @@ public class StatusesAPI extends AbsOpenAPI {
      * 请注意：以下方法匀均同步方法。如果开发者有自己的异步请求机制，请使用该函数。
      * -----------------------------------------------------------------------
      */
-    
+
+    public String friendsTimeline(long since_id, long max_id, int count, int page, boolean base_app,
+                                int featureType, boolean trim_user) {
+        WeiboParameters params =
+                buildTimeLineParamsBase(since_id, max_id, count, page, base_app, trim_user, featureType);
+        return requestSync(sAPIList.get(READ_API_FRIENDS_TIMELINE), params, HTTPMETHOD_GET);
+    }
+
+
     /**
      * @see #mentions(long, long, int, int, int, int, int, boolean, RequestListener)
      */

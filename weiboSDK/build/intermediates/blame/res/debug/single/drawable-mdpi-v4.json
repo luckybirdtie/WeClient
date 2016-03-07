@@ -28,12 +28,12 @@
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/src/main/res/drawable-mdpi/ic_com_sina_weibo_sdk_login_with_account_text_pressed.png"
     },
     {
-        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_com_sina_weibo_sdk_login_with_account_text_focused.png",
-        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/src/main/res/drawable-mdpi/ic_com_sina_weibo_sdk_login_with_account_text_focused.png"
-    },
-    {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_com_sina_weibo_sdk_button_grey_focused.9.png",
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/src/main/res/drawable-mdpi/ic_com_sina_weibo_sdk_button_grey_focused.9.png"
+    },
+    {
+        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_com_sina_weibo_sdk_login_with_account_text_focused.png",
+        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/src/main/res/drawable-mdpi/ic_com_sina_weibo_sdk_login_with_account_text_focused.png"
     },
     {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable-mdpi-v4/ic_com_sina_weibo_sdk_button_grey_pressed.9.png",

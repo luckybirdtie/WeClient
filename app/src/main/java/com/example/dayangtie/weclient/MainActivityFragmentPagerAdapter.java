@@ -21,7 +21,18 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return PageFragment.newInstance(position + 1);
+
+        switch (position){
+            case 0:
+                return FirstPageFragment.newInstance();
+            case 1:
+                return PageFragment.newInstance(position + 1);
+            case 2:
+                return PageFragment.newInstance(position + 1);
+            default:
+                return null;
+        }
+
     }
 
     @Override

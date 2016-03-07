@@ -13,6 +13,8 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+//stub fragment
 public class PageFragment extends Fragment {
 
     public static final String ARG_PAGE = "ARG_PAGE";
