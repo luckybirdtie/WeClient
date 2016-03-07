@@ -44,7 +44,7 @@ public class Weibos {
         return avator;
     }
 
-    public String getImage(){
+    public String getContentImage(){
         return image;
     }
 

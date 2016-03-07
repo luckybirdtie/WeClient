@@ -77,7 +77,6 @@ public class FirstPageFragment extends android.support.v4.app.Fragment {
 
         @Override
         protected String doInBackground(StatusesAPI... params) {
-            Log.d("?????????????", params[0].toString());
             String response = params[0].friendsTimeline(0L, 0L, 10, 1, false, 0, false);
 
             return response;
@@ -86,13 +85,19 @@ public class FirstPageFragment extends android.support.v4.app.Fragment {
         @Override
         protected void onPostExecute(String s) {
             StatusList statuses = StatusList.parse(s);
+            Weibos weibo;
             if (statuses != null && statuses.total_number > 0) {
                 for (com.sina.weibo.sdk.openapi.models.Status status : statuses.statusList){
-                    Weibos weibo = new Weibos(status.user.screen_name, status.created_at, status.text, status.user.profile_image_url);
-                    weiboList.add(weibo);
+                    if (status.thumbnail_pic != null){
+                        weibo = new Weibos(status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic);
+                        weiboList.add(weibo);
+                    }else {
+                        weibo = new Weibos(status.user.screen_name, status.created_at, status.text, status.user.profile_image_url);
+                        weiboList.add(weibo);
+                    }
                 }
             }
-            Log.d("????????????", String.valueOf(weiboList.size()));
+           // Log.d("????????????", String.valueOf(weiboList.size()));
             setupRecyclerView(rv);
         }
     }

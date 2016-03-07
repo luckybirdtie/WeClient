@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,9 +40,10 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
                 View v1 = inflater.inflate(R.layout.viewholder_text, parent, false);
                 viewHolder = new ViewHolderWeiboText(v1);
                 break;
+            // case 1: image weibo
             case 1:
-                View v2 = inflater.inflate(R.layout.viewholder_text, parent, false);
-                viewHolder = new ViewHolderWeiboText(v2);
+                View v2 = inflater.inflate(R.layout.viewholder_image, parent, false);
+                viewHolder = new ViewHolderWeiboImage(v2);
                 break;
             default:
                 View v = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
@@ -60,6 +62,8 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
                 configViewHolderWeiboText(viewHolderWeiboText, position);
                 break;
             case 1:
+                ViewHolderWeiboImage viewHolderWeiboImage = (ViewHolderWeiboImage) holder;
+                configViewHolderWeiboImage(viewHolderWeiboImage, position);
                 break;
         }
     }
@@ -77,5 +81,16 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
         holder.getTv_content().setText(weibos.getContent());
         holder.getTv_time().setText(weibos.getTime());
         Picasso.with(parent.getContext()).load(weibos.getAvator()).into(holder.getAvatorImage());
+    }
+
+    public void configViewHolderWeiboImage(ViewHolderWeiboImage holder, int position){
+        Weibos weibos = weibosList.get(position);
+        holder.getTv_userName().setText(weibos.getUserName());
+        holder.getTv_content().setText(weibos.getContent());
+        holder.getTv_time().setText(weibos.getTime());
+        Picasso.with(parent.getContext()).load(weibos.getAvator()).into(holder.getAvatorImage());
+        Log.d("???????????", weibos.getContentImage());
+        //Picasso.with(parent.getContext()).load(weibos.getContentImage()).into(holder.getIvContent());
+        Ion.with(holder.getIvContent()).load(weibos.getContentImage());
     }
 }
