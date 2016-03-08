@@ -1,5 +1,6 @@
 package com.example.dayangtie.weclient;
 
+import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import java.util.List;
  * Created by dayangtie on 3/03/16.
  */
 public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
+    private static final String TAG = "WeiboRecyclerViewAdapter";
 
     private List<Weibos> weibosList;
     private ViewGroup parent;
@@ -68,16 +70,28 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
         }
     }
 
+
     @Override
     public int getItemCount() {
-        //Log.d("???????", String.valueOf(weibosList.size()));
+     //   Log.d(TAG, "getItemCount" + weibosList.size());
         return weibosList.size();
+    }
+
+    public void clear(){
+      //  Log.d(TAG, "before clear" + weibosList.size());
+        weibosList.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Weibos> list){
+       // Log.d(TAG, "addAll" + list.size());
+        weibosList.addAll(list);
+        notifyDataSetChanged();
     }
 
     public void configViewHolderWeiboText(ViewHolderWeiboText holder, int position){
         Weibos weibos = weibosList.get(position);
         holder.getTv_userName().setText(weibos.getUserName());
-        //Log.d("sssssssss", weibos.getUserName());
         holder.getTv_content().setText(weibos.getContent());
         holder.getTv_time().setText(weibos.getTime());
         Picasso.with(parent.getContext()).load(weibos.getAvator()).into(holder.getAvatorImage());
@@ -89,7 +103,6 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
         holder.getTv_content().setText(weibos.getContent());
         holder.getTv_time().setText(weibos.getTime());
         Picasso.with(parent.getContext()).load(weibos.getAvator()).into(holder.getAvatorImage());
-        Log.d("???????????", weibos.getContentImage());
         //Picasso.with(parent.getContext()).load(weibos.getContentImage()).into(holder.getIvContent());
         Ion.with(holder.getIvContent()).load(weibos.getContentImage());
     }
