@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.dayangtie.weclient.sina.AccessTokenKeeper;
@@ -49,6 +50,7 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
     private boolean viewRenderedFirstTime = true;
     private boolean refreshingView = false;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBar;
 
     public FirstPageFragment(){
     }
@@ -64,6 +66,7 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
         View view = inflater.inflate(R.layout.fragment_first_page, container, false);
         weiboList = new ArrayList<Weibos>();
         moreWeibo = new ArrayList<Weibos>();
+        progressBar= (ProgressBar) view.findViewById(R.id.pbLoading);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         // Configure the refreshing colors of progress circle
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -99,6 +102,10 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
     public class MyAsynctask extends AsyncTask <StatusesAPI, Void, String>{
 
         @Override
+        protected void onPreExecute() {
+        }
+
+        @Override
         protected String doInBackground(StatusesAPI... params) {
             if (viewRenderedFirstTime) {
                 weiboList.clear();
@@ -108,10 +115,12 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
             }
         }
 
+
         @Override
         protected void onPostExecute(String s) {
             StatusList statuses = StatusList.parse(s);
             Weibos weibo;
+            progressBar.setVisibility(ProgressBar.INVISIBLE);
 
             if (viewRenderedFirstTime) {
                 if (statuses != null && statuses.total_number > 0) {
@@ -167,6 +176,8 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
         rv.setLayoutManager(linearLayoutManager);
         adapter = new WeiboRecyclerViewAdapter(list);
         rv.setAdapter(adapter);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
+        rv.addItemDecoration(itemDecoration);
         rv.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {

@@ -104,6 +104,6 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
         holder.getTv_time().setText(weibos.getTime());
         Picasso.with(parent.getContext()).load(weibos.getAvator()).into(holder.getAvatorImage());
         //Picasso.with(parent.getContext()).load(weibos.getContentImage()).into(holder.getIvContent());
-        Ion.with(holder.getIvContent()).load(weibos.getContentImage());
+        Ion.with(holder.getIvContent()).load(weibos.getContentImage()); //able to process .gif file.
     }
 }
