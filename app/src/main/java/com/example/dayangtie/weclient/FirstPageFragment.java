@@ -120,7 +120,7 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
         protected void onPostExecute(String s) {
             StatusList statuses = StatusList.parse(s);
             Weibos weibo;
-            progressBar.setVisibility(ProgressBar.INVISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
 
             if (viewRenderedFirstTime) {
                 if (statuses != null && statuses.total_number > 0) {

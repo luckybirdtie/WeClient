@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,8 +8,20 @@
             android:visibility="visible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:progressBackgroundTint="#006030"
-            android:layout_gravity="center_horizontal|center_vertical" />
+            android:layout_gravity="center_horizontal|center_vertical"/>
+    <!--<com.example.dayangtie.weclient.MyRoundProgressBar-->
+        <!--android:id="@+id/pbLoading"-->
+        <!--android:visibility="visible"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_gravity="center_horizontal|center_vertical"-->
+        <!--android_custom:roundColor="#D1D1D1"-->
+        <!--android_custom:roundProgressColor="@color/color_blue"-->
+        <!--android_custom:textColor="@color/color_blue"-->
+        <!--android_custom:roundWidth="4dp"-->
+        <!--android_custom:textSize="13dp"-->
+        <!--android_custom:max="10"-->
+        <!--android_custom:textIsDisplayable = "false"/>-->
 
         <android.support.v4.widget.SwipeRefreshLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
