@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.dayangtie.weclient.util.TimeCalculator;
 import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Picasso;
 
@@ -101,7 +102,9 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
         Weibos weibos = weibosList.get(position);
         holder.getTv_userName().setText(weibos.getUserName());
         holder.getTv_content().setText(weibos.getContent());
-        holder.getTv_time().setText(weibos.getTime());
+        /** format of returned String from Weibo: "Fri Mar 11 00:29:09 +0800 2016". **/
+        String dateString = TimeCalculator.getDateString(parent.getContext(), (TimeCalculator.stringToDate(weibos.getTime(), "EEE MMM dd HH:mm:ss Z yyyy")));
+        holder.getTv_time().setText(TimeCalculator.timeSpanTillNow(parent.getContext(), dateString));
         Picasso.with(parent.getContext()).load(weibos.getAvator()).into(holder.getAvatorImage());
         //Picasso.with(parent.getContext()).load(weibos.getContentImage()).into(holder.getIvContent());
         Ion.with(holder.getIvContent()).load(weibos.getContentImage()); //able to process .gif file.

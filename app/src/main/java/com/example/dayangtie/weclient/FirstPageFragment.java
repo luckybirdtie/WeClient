@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.dayangtie.weclient.sina.AccessTokenKeeper;
 import com.example.dayangtie.weclient.sina.Constants;
+import com.example.dayangtie.weclient.util.TimeCalculator;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.exception.WeiboException;
 import com.sina.weibo.sdk.net.RequestListener;
@@ -28,6 +30,8 @@ import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.sina.weibo.sdk.utils.LogUtil;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -73,6 +77,13 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(new Date());
+//        Log.d(TAG, TimeCalculator.getDateString(getActivity(), calendar.getTime()));
+
+//        Log.d(TAG, String.valueOf(DateFormat.is24HourFormat(getActivity())));
+
 
         return view;
     }
