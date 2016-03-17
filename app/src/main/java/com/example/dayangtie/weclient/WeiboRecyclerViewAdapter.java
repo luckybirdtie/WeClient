@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dayangtie.weclient.util.TimeCalculator;
+import com.example.dayangtie.weclient.util.ConvertNormalStringToSpannableString;
 import com.koushikdutta.ion.Ion;
 import com.squareup.picasso.Picasso;
 
@@ -59,6 +60,7 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        //Log.d(TAG, String.valueOf(holder.getItemViewType()));
         switch (holder.getItemViewType()){
             case 0:
                 ViewHolderWeiboText viewHolderWeiboText = (ViewHolderWeiboText) holder;
@@ -93,8 +95,9 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
     public void configViewHolderWeiboText(ViewHolderWeiboText holder, int position){
         Weibos weibos = weibosList.get(position);
         holder.getTv_userName().setText(weibos.getUserName());
-        holder.getTv_content().setText(weibos.getContent());
-        holder.getTv_time().setText(weibos.getTime());
+        holder.getTv_content().setText(ConvertNormalStringToSpannableString.convertNormalStringToSpannableString(parent.getContext(), weibos.getContent()));
+        //holder.getTv_time().setText(weibos.getTime());
+        holder.getTv_time().setText(timeDiff(weibos));
         Picasso.with(parent.getContext()).load(weibos.getAvator()).into(holder.getAvatorImage());
     }
 
@@ -102,11 +105,17 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
         Weibos weibos = weibosList.get(position);
         holder.getTv_userName().setText(weibos.getUserName());
         holder.getTv_content().setText(weibos.getContent());
-        /** format of returned String from Weibo: "Fri Mar 11 00:29:09 +0800 2016". **/
-        String dateString = TimeCalculator.getDateString(parent.getContext(), (TimeCalculator.stringToDate(weibos.getTime(), "EEE MMM dd HH:mm:ss Z yyyy")));
-        holder.getTv_time().setText(TimeCalculator.timeSpanTillNow(parent.getContext(), dateString));
+//        String dateString = TimeCalculator.getDateString(parent.getContext(), (TimeCalculator.stringToDate(weibos.getTime(), "EEE MMM dd HH:mm:ss Z yyyy")));
+//        holder.getTv_time().setText(TimeCalculator.timeSpanTillNow(parent.getContext(), dateString));
+        holder.getTv_time().setText(timeDiff(weibos));
         Picasso.with(parent.getContext()).load(weibos.getAvator()).into(holder.getAvatorImage());
         //Picasso.with(parent.getContext()).load(weibos.getContentImage()).into(holder.getIvContent());
         Ion.with(holder.getIvContent()).load(weibos.getContentImage()); //able to process .gif file.
+    }
+
+    /**计算此微博发布时间与当前发布时间的差值； format of returned String from Weibo: "Fri Mar 11 00:29:09 +0800 2016"**/
+    public String timeDiff(Weibos weibos){
+        String dateString = TimeCalculator.getDateString(parent.getContext(), (TimeCalculator.stringToDate(weibos.getTime(), "EEE MMM dd HH:mm:ss Z yyyy")));
+        return TimeCalculator.timeSpanTillNow(parent.getContext(), dateString);
     }
 }

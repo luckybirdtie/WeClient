@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorfab">#0080FF</color>
     <color name="color_blue">#303F9F</color>
+    <color name="color_name_list">#FF0080</color>
+    <color name="textColor">#003D79</color>
+    <color name="foreground_color">#D1E9E9</color>
 </resources>

@@ -68,5 +68,4 @@ public class StatusList {
         }
         
         return statuses;
-    }
-}
+    }}

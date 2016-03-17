@@ -29,6 +29,7 @@ import com.sina.weibo.sdk.openapi.models.Status;
 import com.sina.weibo.sdk.openapi.models.StatusList;
 import com.sina.weibo.sdk.utils.LogUtil;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -136,7 +137,9 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
             if (viewRenderedFirstTime) {
                 if (statuses != null && statuses.total_number > 0) {
                     for (com.sina.weibo.sdk.openapi.models.Status status : statuses.statusList) {
-                        if (status.thumbnail_pic != null) {
+                        //Log.d(TAG, status.pic_urls.get(0));
+                        //Log.d(TAG, String.valueOf(status.pic_urls.size()));
+                        if (status.pic_urls != null) {
                             weibo = new Weibos(status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic);
                             weiboList.add(weibo);
                             //Log.d("since_id", status.id);

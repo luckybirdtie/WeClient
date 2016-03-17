@@ -64,7 +64,7 @@ public class TimeCalculator {
         Calendar calendar = Calendar.getInstance();
         Long now = calendar.getTimeInMillis();
         Date date = null;
-        //Log.d("now:", String.valueOf(now));
+       // Log.d("now:", String.valueOf(now));
         if (is24Hours(context)) {
             date = stringToDate(dateString, DATE_FORMAT_24);
         }else{
@@ -72,10 +72,10 @@ public class TimeCalculator {
         }
         calendar.setTime(date);
         long past = calendar.getTimeInMillis();
-        //Log.d("past:", String.valueOf(past));
+       // Log.d("past:", String.valueOf(past));
         /**相差的秒数**/
         long timeDiff = (now - past)/1000;
-        //Log.d("timedifff:", String.valueOf(timeDiff));
+       // Log.d("timedifff:", String.valueOf(timeDiff));
 
         StringBuffer sb = new StringBuffer();
         if (timeDiff > 0 && timeDiff < 60) { // 1小时内
