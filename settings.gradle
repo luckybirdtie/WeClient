@@ -1,2 +1,2 @@
-include ':app', ':downloademo'
+include ':app'
 include ':weiboSDK'
