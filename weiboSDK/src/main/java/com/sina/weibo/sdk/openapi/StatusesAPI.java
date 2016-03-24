@@ -52,7 +52,12 @@ public class StatusesAPI extends AbsOpenAPI {
     
     /** 原创筛选类型，0：全部微博、1：原创的微博。  */
     public static final int TYPE_FILTER_ALL     = 0;
-    public static final int TYPE_FILTER_ORIGAL  = 1;    
+    public static final int TYPE_FILTER_ORIGAL  = 1;
+
+    /** 表情类别，face：普通表情、ani：魔法表情、cartoon：动漫表情，默认为face。 */
+    public static final String EMOTION_TYPE_FACE    = "face";
+    public static final String EMOTION_TYPE_ANI     = "ani";
+    public static final String EMOTION_TYPE_CARTOON = "cartoon";
 
     /** API URL */
     private static final String API_BASE_URL = API_SERVER + "/statuses";
@@ -205,7 +210,8 @@ public class StatusesAPI extends AbsOpenAPI {
      * 请注意：以下方法匀均同步方法。如果开发者有自己的异步请求机制，请使用该函数。
      * -----------------------------------------------------------------------
      */
-
+    //Dayang Tie
+    //---------------------------------------------------------------------------------------------------------------
     public String friendsTimeline(long since_id, long max_id, int count, int page, boolean base_app,
                                 int featureType, boolean trim_user) {
         WeiboParameters params =
@@ -213,6 +219,28 @@ public class StatusesAPI extends AbsOpenAPI {
         return requestSync(sAPIList.get(READ_API_FRIENDS_TIMELINE), params, HTTPMETHOD_GET);
     }
 
+    /**
+     * 获取微博官方表情的详细信息。
+     *
+     * @param type      表情类别，表情类别，face：普通表情、ani：魔法表情、cartoon：动漫表情，默认为face。可为以下几种：
+     *                  <li> {@link #EMOTION_TYPE_FACE}
+     *                  <li> {@link #EMOTION_TYPE_ANI}
+     *                  <li> {@link #EMOTION_TYPE_CARTOON}
+     * @param language  语言类别，cnname：、twname：，默认为cnname。
+     *                  <li> {@link #LANGUAGE_CNNAME}
+     *                  <li> {@link #LANGUAGE_TWNAME}
+     * @param listener  异步请求回调接口
+     */
+    public String emotions(String type, String language) {
+        WeiboParameters params = new WeiboParameters(mAppKey);
+        params.put("type", type);
+        params.put("language", language);
+        return requestSync(API_SERVER + "/emotions.json", params, HTTPMETHOD_GET);
+    }
+
+
+    //---------------------------------------------------------------------------------------------------------------
+    //Dayang Tie
 
     /**
      * @see #mentions(long, long, int, int, int, int, int, boolean, RequestListener)

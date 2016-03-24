@@ -160,12 +160,12 @@
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png",
-        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_scrubber_track_mtrl_alpha.9.png"
-    },
-    {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_list_pressed_holo_dark.9.png",
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_scrubber_track_mtrl_alpha.9.png",
+        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xhdpi/abc_scrubber_track_mtrl_alpha.9.png"
     },
     {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_tab_indicator_mtrl_alpha.9.png",

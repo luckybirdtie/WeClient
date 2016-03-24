@@ -32,12 +32,12 @@
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_dark.xml"
     },
     {
-        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_dark.xml",
-        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_dialog_material_background_dark.xml"
-    },
-    {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable/abc_tab_indicator_material.xml",
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_dark.xml",
+        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_dialog_material_background_dark.xml"
     },
     {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable/abc_textfield_search_material.xml",
@@ -76,12 +76,12 @@
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_text_cursor_material.xml"
     },
     {
-        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_light.xml",
-        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_dialog_material_background_light.xml"
-    },
-    {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable/design_fab_background.xml",
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/design/23.1.1/res/drawable/design_fab_background.xml"
+    },
+    {
+        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable/abc_dialog_material_background_light.xml",
+        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_dialog_material_background_light.xml"
     },
     {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/debug/drawable/abc_spinner_textfield_background_material.xml",

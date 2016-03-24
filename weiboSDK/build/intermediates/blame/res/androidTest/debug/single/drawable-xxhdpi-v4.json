@@ -68,12 +68,12 @@
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/ic_com_sina_weibo_sdk_login_with_account_text_pressed.png"
     },
     {
-        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png",
-        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xxhdpi/abc_btn_switch_to_on_mtrl_00001.9.png"
-    },
-    {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/abc_list_pressed_holo_dark.9.png",
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xxhdpi/abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/abc_btn_switch_to_on_mtrl_00001.9.png",
+        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable-xxhdpi/abc_btn_switch_to_on_mtrl_00001.9.png"
     },
     {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png",

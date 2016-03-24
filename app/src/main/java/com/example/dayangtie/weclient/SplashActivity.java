@@ -5,7 +5,6 @@
 
 package com.example.dayangtie.weclient;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -48,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void goHome() {
-        Intent intent = new Intent(this, MainPage.class);
+        Intent intent = new Intent(this, MainPageActivity.class);
         this.startActivity(intent);
         this.finish();
     }
@@ -67,9 +66,9 @@ public class SplashActivity extends AppCompatActivity {
         if(!isFirstLaunch){
             mHandler.sendEmptyMessageDelayed(GO_HOME, SPLASH_DELAY_MILLIS);
             //若想要LOAD欢迎页面， uncomment below to clean local SharedPreferences.
-            SharedPreferences.Editor editor = mSharedPreferences.edit();
-            editor.clear();
-            editor.apply();
+//            SharedPreferences.Editor editor = mSharedPreferences.edit();
+//            editor.clear();
+//            editor.apply();
         }
         else{
             mHandler.sendEmptyMessageDelayed(GO_GUIDE, SPLASH_DELAY_MILLIS);

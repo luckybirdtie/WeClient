@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -56,6 +57,8 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
     private boolean refreshingView = false;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
+
+    private static int i = 0;
 
     public FirstPageFragment(){
     }
@@ -137,36 +140,27 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
             if (viewRenderedFirstTime) {
                 if (statuses != null && statuses.total_number > 0) {
                     for (com.sina.weibo.sdk.openapi.models.Status status : statuses.statusList) {
-                        //Log.d(TAG, status.pic_urls.get(0));
-                        //Log.d(TAG, String.valueOf(status.pic_urls.size()));
-                        if (status.pic_urls != null) {
-                            weibo = new Weibos(status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic);
-                            weiboList.add(weibo);
-                            //Log.d("since_id", status.id);
-                            earliest_id = Long.parseLong(status.id);
-                        } else {
-                            weibo = new Weibos(status.user.screen_name, status.created_at, status.text, status.user.profile_image_url);
+                            weibo = new Weibos(status.id, status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic, status.pic_urls,
+                                    status.reposts_count, status.comments_count, status.attitudes_count, status.source, status.favorited, status.retweeted_status);
                             weiboList.add(weibo);
                             earliest_id = Long.parseLong(status.id);
-                            //Log.d("since_id", status.id);
-                        }
+                        Log.d(TAG, "onPostExecute: " + weibo.getContent() + " : " + i++);
+//                        if (status.pic_urls != null){
+//                            for (int i = 0; i < status.pic_urls.size(); i++)
+//                                Log.d(TAG, weibo.getLargePics().get(i));
+//                        }
+
                     }
                 }
             }else{
                 if (statuses != null && statuses.total_number > 0) {
                     moreWeibo.clear();
                     for (com.sina.weibo.sdk.openapi.models.Status status : statuses.statusList) {
-                        if (status.thumbnail_pic != null) {
-                            weibo = new Weibos(status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic);
-                            moreWeibo.add(weibo);
-                            //Log.d("since_id", status.id);
-                            earliest_id = Long.parseLong(status.id);
-                        } else {
-                            weibo = new Weibos(status.user.screen_name, status.created_at, status.text, status.user.profile_image_url);
+                        weibo = new Weibos(status.id, status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic, status.pic_urls,
+                                status.reposts_count, status.comments_count, status.attitudes_count, status.source, status.favorited, status.retweeted_status);
                             moreWeibo.add(weibo);
                             earliest_id = Long.parseLong(status.id);
-                            //Log.d("since_id", status.id);
-                        }
+                        Log.d(TAG, "onPostExecute: " + weibo.getContent() + " : " + i++);
                     }
                 }
             }
@@ -179,7 +173,7 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
             } else{
                 weiboList.addAll(moreWeibo);
                 int curSize = adapter.getItemCount();
-                Log.d(TAG, String.valueOf(curSize));
+                //Log.d(TAG, String.valueOf(curSize));
                 adapter.notifyItemRangeInserted(curSize, weiboList.size() - 1);
             }
         }
@@ -195,7 +189,7 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
         rv.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
-                Log.d(TAG, "yes i am executing:" + viewRenderedFirstTime);
+                //Log.d(TAG, "yes i am executing:" + viewRenderedFirstTime);
                 new MyAsynctask().execute(mStatusesAPI);
             }
         });

@@ -80,16 +80,16 @@
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
     },
     {
-        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/release/drawable/abc_tab_indicator_material.xml",
-        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_tab_indicator_material.xml"
-    },
-    {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/release/drawable/abc_item_background_holo_light.xml",
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_item_background_holo_light.xml"
     },
     {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/release/drawable/com_sina_weibo_sdk_login_button_with_account_text.xml",
         "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/src/main/res/drawable/com_sina_weibo_sdk_login_button_with_account_text.xml"
+    },
+    {
+        "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/release/drawable/abc_tab_indicator_material.xml",
+        "source": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/drawable/abc_tab_indicator_material.xml"
     },
     {
         "merged": "/Users/dayangtie/Downloads/WeClient/weiboSDK/build/intermediates/res/merged/release/drawable/abc_item_background_holo_dark.xml",

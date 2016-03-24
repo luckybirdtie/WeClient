@@ -5,11 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 
 import java.util.List;
 
@@ -57,6 +55,7 @@ public class WelcomViewPagerAdapter extends PagerAdapter {
 
     }
 
+    //下次启动时不再显示GUIDE页面
     private void setGuided() {
         SharedPreferences mSharedPreferences = mActivity.getSharedPreferences(SplashActivity.SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
@@ -65,7 +64,7 @@ public class WelcomViewPagerAdapter extends PagerAdapter {
     }
 
     private void goHome() {
-        Intent intent = new Intent(mActivity, MainPage.class);
+        Intent intent = new Intent(mActivity, MainPageActivity.class);
         mActivity.startActivity(intent);
         mActivity.finish();
     }
