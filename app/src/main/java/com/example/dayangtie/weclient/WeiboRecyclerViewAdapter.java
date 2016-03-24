@@ -90,8 +90,10 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
     }
 
     public void addAll(List<Weibos> list){
-       // Log.d(TAG, "addAll" + list.size());
-        weibosList.addAll(list);
+        Log.d(TAG, "addAll listsize" + list.size());
+        Log.d(TAG, "addAll: before weibolist" + weibosList.size());
+        //weibosList.addAll(list);
+        Log.d(TAG, "addAll: " + weibosList.size());
         notifyDataSetChanged();
     }
 
@@ -118,7 +120,7 @@ public class WeiboRecyclerViewAdapter extends RecyclerView.Adapter {
 //        holder.getGridLayout().removeAllViews();
 //        holder.getGridLayout().setColumnCount(1);
 //        ImageView iv = new ImageView(holder.getGridLayout().getContext());
-//        Ion.with(iv).load(weibos.getContentImage());
+        Ion.with(holder.getIvContent()).load(weibos.getContentImage());
 //        holder.getGridLayout().addView(iv);
 //
         Log.d(TAG, "adapter position: " + position);

@@ -29,10 +29,10 @@ public class ViewHolderOriginalWithImage extends RecyclerView.ViewHolder impleme
         tv_userName = (TextView) itemView.findViewById(R.id.txt_username);
         tv_time = (TextView) itemView.findViewById(R.id.txt_time);
         tv_content = (TextView) itemView.findViewById(R.id.txt_weibo_content);
-        gridLayout = (GridLayout) itemView.findViewById(R.id.layout_grid);
-        gridLayout.setVisibility(GridLayout.GONE);
+        //gridLayout = (GridLayout) itemView.findViewById(R.id.layout_grid);
+        //gridLayout.setVisibility(GridLayout.GONE);
         //Log.d(TAG, "ViewHolderOriginalWithImage:" + i++);
-        //contentImage = (ImageView) itemView.findViewById(R.id.img_weibo_content);
+        contentImage = (ImageView) itemView.findViewById(R.id.img_weibo_content);
         itemView.setOnClickListener(this);
     }
 
