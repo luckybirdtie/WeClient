@@ -1,10 +1,14 @@
 package com.example.dayangtie.weclient;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,7 +43,7 @@ import java.util.List;
 /**
  * Created by dayangtie on 4/03/16.
  */
-public class FirstPageFragment extends android.support.v4.app.Fragment{
+public class FirstPageFragment extends android.support.v4.app.Fragment implements WeiboRecyclerViewAdapter.MyFragmentListener{
 
     private static final String TAG = "FirstPageFragment";
 
@@ -57,13 +61,19 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
     private boolean refreshingView = false;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
+    private static FragmentManager mFragManager;
+    private static Context activityContext;
+    private ViewGroup container;
+    WeiboListApp mApp;
 
     private static int i = 0;
 
     public FirstPageFragment(){
     }
 
-    public static FirstPageFragment newInstance(){
+    public static FirstPageFragment newInstance(FragmentManager fm, Context context){
+        mFragManager = fm;
+        activityContext = context;
         return new FirstPageFragment();
     }
 
@@ -82,18 +92,13 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(new Date());
-//        Log.d(TAG, TimeCalculator.getDateString(getActivity(), calendar.getTime()));
-
-//        Log.d(TAG, String.valueOf(DateFormat.is24HourFormat(getActivity())));
-
-
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+        mApp = (WeiboListApp) getActivity().getApplicationContext();
 
         rv = (RecyclerView) swipeRefreshLayout.findViewById(R.id.firstpage_recyclerview);
         // 获取当前已保存过的 Token
@@ -114,6 +119,10 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
 
     }
 
+    @Override
+    public void onHolderItemClicked(int position) {
+    }
+
     public class MyAsynctask extends AsyncTask <StatusesAPI, Void, String>{
 
         @Override
@@ -124,10 +133,9 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
         protected String doInBackground(StatusesAPI... params) {
             if (viewRenderedFirstTime) {
                 weiboList.clear();
-                Log.d(TAG, "doInBackground: executing" + weiboList.size());
-                return params[0].friendsTimeline(0L, 0L, 30, 1, false, 0, false);
+                return params[0].friendsTimeline(0L, 0L, 50, 1, false, 0, false);
             }else{
-                return params[0].friendsTimeline(0L, earliest_id, 15, 1, false, 0, false);
+                return params[0].friendsTimeline(0L, earliest_id, 50, 1, false, 0, false);
             }
         }
 
@@ -141,29 +149,29 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
             if (viewRenderedFirstTime) {
                 if (statuses != null && statuses.total_number > 0) {
                     for (com.sina.weibo.sdk.openapi.models.Status status : statuses.statusList) {
-                            weibo = new Weibos(status.id, status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic, status.pic_urls,
+                            weibo = new Weibos(status.id, status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic, status.original_pic, status.pic_urls,
                                     status.reposts_count, status.comments_count, status.attitudes_count, status.source, status.favorited, status.retweeted_status);
                             weiboList.add(weibo);
                             earliest_id = Long.parseLong(status.id);
-                        Log.d(TAG, (i++) + " :onPostExecute: " + weibo.getContent() + " : " + earliest_id);
+//                        Log.d(TAG, (i++) + " :onPostExecute: " + weibo.getContent() + " : " + earliest_id);
 //                        if (status.pic_urls != null){
 //                            for (int i = 0; i < status.pic_urls.size(); i++)
 //                                Log.d(TAG, weibo.getLargePics().get(i));
 //                        }
 
                     }
+                    mApp.setList(weiboList);
                 }
             }else{
                 if (statuses != null && statuses.total_number > 0) {
                     moreWeibo.clear();
                     for (com.sina.weibo.sdk.openapi.models.Status status : statuses.statusList) {
-                        weibo = new Weibos(status.id, status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic, status.pic_urls,
+                        weibo = new Weibos(status.id, status.user.screen_name, status.created_at, status.text, status.user.profile_image_url, status.thumbnail_pic, status.original_pic, status.pic_urls,
                                 status.reposts_count, status.comments_count, status.attitudes_count, status.source, status.favorited, status.retweeted_status);
-                        Log.d(TAG, (i++) + " :onPostExecute addmore before compare: " + weibo.getContent() + " : " + earliest_id);
                         if (!weibo.getId().equals(String.valueOf(earliest_id))){
                                 moreWeibo.add(weibo);
                                 earliest_id = Long.parseLong(status.id);
-                            Log.d(TAG, (i++) + " :onPostExecute addmore after compare: " + weibo.getContent() + " : " + earliest_id);
+//                            Log.d(TAG, (i++) + " :onPostExecute addmore after compare: " + weibo.getContent() + " : " + earliest_id);
                         }
                     }
                 }
@@ -186,7 +194,15 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
     public void setupRecyclerView(RecyclerView rv, List<Weibos> list) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(rv.getContext());
         rv.setLayoutManager(linearLayoutManager);
-        adapter = new WeiboRecyclerViewAdapter(list);
+        adapter = new WeiboRecyclerViewAdapter(list, new WeiboRecyclerViewAdapter.MyFragmentListener() {
+            @Override
+            public void onHolderItemClicked(int position) {
+                Log.d(TAG, "onHolderItemClicked: i am clicked");
+                Intent i = new Intent(getActivity(), DetailWeiboActivity.class);
+                i.putExtra("Position", position);
+                startActivity(i);
+            }
+        });
         rv.setAdapter(adapter);
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
         rv.addItemDecoration(itemDecoration);
@@ -210,18 +226,18 @@ public class FirstPageFragment extends android.support.v4.app.Fragment{
             cacheList.add(weibo);
         }
         //clear old data associated with adapter
-        Log.d(TAG, "onRefreshComplete: itemcount before" + adapter.getItemCount());
+
         adapter.clear();
-        Log.d(TAG, "onRefreshComplete: itemcount" + adapter.getItemCount());
+//        Log.d(TAG, "onRefreshComplete: itemcount" + adapter.getItemCount());
         /** weiboList = localWeiboList; 最开始用了这种赋值，这个错误导致了刷新后，recyclerView的onScrollListener不起作用了。因为在adapter里的方法 getItemCount()使用的是原weiboList, 在此处，对weiboList实例重置，将导致weiboList的变化不再对adapter起作用。*/
         for (Weibos weibo : cacheList){
             weiboList.add(weibo);
         }
 
-        Log.d(TAG, "onRefreshComplete: " + weiboList.size());
-        Log.d(TAG, "onRefreshComplete: itemcount" + adapter.getItemCount());
+//        Log.d(TAG, "onRefreshComplete: " + weiboList.size());
+//        Log.d(TAG, "onRefreshComplete: itemcount" + adapter.getItemCount());
         adapter.addAll(weiboList);
-        Log.d(TAG, "onRefreshComplete: adapter size" + adapter.getItemCount());
+//        Log.d(TAG, "onRefreshComplete: adapter size" + adapter.getItemCount());
         //refresh completed, stop it
         swipeRefreshLayout.setRefreshing(false);
         refreshingView = false;

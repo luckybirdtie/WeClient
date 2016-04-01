@@ -8,4 +8,6 @@
     <color name="color_name_list">#FF0080</color>
     <color name="textColor">#003D79</color>
     <color name="foreground_color">#D1E9E9</color>
+    <color name="retweet_background">#F0F0F0</color>
+    <color name="retweet_name">#FFDC35</color>
 </resources>

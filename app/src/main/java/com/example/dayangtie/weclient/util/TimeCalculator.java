@@ -79,7 +79,7 @@ public class TimeCalculator {
 
         StringBuffer sb = new StringBuffer();
         if (timeDiff > 0 && timeDiff < 60) { // 1小时内
-            return sb.append(timeDiff + "秒前").toString();
+            return sb.append(timeDiff + "刚刚").toString();
         } else if (timeDiff > 60 && timeDiff < 3600) {
             return sb.append(timeDiff / 60+"分钟前").toString();
         } else if (timeDiff >= 3600 && timeDiff < 3600 * 24) {

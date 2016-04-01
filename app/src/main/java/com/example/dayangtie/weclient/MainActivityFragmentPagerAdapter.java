@@ -11,12 +11,14 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private int pageCount = 3;
-    private String[] tabTitles = {"Tab1", "Tab2", "Tab3"};
-    private Context context;
+    private String[] tabTitles = {"微博", "公共微博", "用户"};
+    private Context activityContext;
+    private FragmentManager fm;
 
     public MainActivityFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        this.context = context;
+        this.fm = fm;
+        activityContext = context;
     }
 
     @Override
@@ -24,7 +26,7 @@ public class MainActivityFragmentPagerAdapter extends FragmentPagerAdapter {
 
         switch (position){
             case 0:
-                return FirstPageFragment.newInstance();
+                return FirstPageFragment.newInstance(fm, activityContext);
             case 1:
                 return PageFragment.newInstance(position + 1);
             case 2:

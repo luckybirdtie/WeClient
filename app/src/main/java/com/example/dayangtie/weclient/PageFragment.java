@@ -35,7 +35,7 @@ public class PageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPage = this.getArguments().getInt(ARG_PAGE);
+        //mPage = this.getArguments().getInt(ARG_PAGE);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class PageFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_page, container, false);
         TextView tv = (TextView) view.findViewById(R.id.textView);
-        tv.setText("Fragment#" + mPage);
+        tv.setText("Fragment#");
         return view;
     }
 
